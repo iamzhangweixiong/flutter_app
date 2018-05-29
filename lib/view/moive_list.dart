@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class MovieList extends StatefulWidget {
   @override
@@ -27,7 +28,7 @@ class _MovieListState extends State<MovieList> {
 
   Widget selectBody() {
     if (isLoading) {
-      return new Center(child: const CupertinoActivityIndicator());
+      return new Center(child: CircularProgressIndicator());
     } else {
       return new ListView.builder(
           padding: EdgeInsets.zero,
@@ -36,6 +37,12 @@ class _MovieListState extends State<MovieList> {
             final movie = movies[i];
             return new ListTile(
                 title: new Text(movie['title']),
+                trailing: new CachedNetworkImage(
+                    imageUrl: movie['images']['small'],
+                    width: 60.0,
+                    height: 60.0,
+                    placeholder: new CupertinoActivityIndicator(),
+                    errorWidget: new Icon(Icons.error)),
                 subtitle: new Text(movie['original_title']));
           });
     }
