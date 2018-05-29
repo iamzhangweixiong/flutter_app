@@ -14,10 +14,12 @@ class DemoLocalizations {
 
   static Map<String, Map<String, String>> _localizedValues = {
     'en': {
+      'app':'Flutter Demo',
       'title': 'Hello World',
       'movie_title': 'fetch movie'
     },
     'zh': {
+      'app':'Flutter Demo',
       'title': '哈哈',
       'movie_title': '电影'
     }
@@ -25,6 +27,14 @@ class DemoLocalizations {
 
   String get title {
     return _localizedValues[locale.languageCode]['title'];
+  }
+
+  String get app {
+    return _localizedValues[locale.languageCode]['app'];
+  }
+
+  String get movieTitle {
+    return _localizedValues[locale.languageCode]['movie_title'];
   }
 }
 

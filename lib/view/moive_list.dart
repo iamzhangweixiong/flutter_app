@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_app/localization/demo_localizations.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -23,7 +24,9 @@ class _MovieListState extends State<MovieList> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: new AppBar(title: new Text("fetch moive")), body: selectBody());
+        appBar: new AppBar(
+            title: new Text(DemoLocalizations.of(context).movieTitle)),
+        body: selectBody());
   }
 
   Widget selectBody() {

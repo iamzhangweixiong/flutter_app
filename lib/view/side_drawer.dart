@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/localization/demo_localizations.dart';
 import 'package:flutter_app/view/moive_list.dart';
 
 class SideDrawer extends StatefulWidget {
@@ -23,7 +24,7 @@ class _SideDrawerState extends State<SideDrawer> {
                 Navigator.pop(context);
               }),
           new ListTile(
-              title: new Text('fetch movie'),
+              title: new Text(DemoLocalizations.of(context).movieTitle),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(context, new MaterialPageRoute(builder: (context) {
