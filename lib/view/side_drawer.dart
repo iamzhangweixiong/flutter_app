@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/view/moive_list.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
@@ -48,20 +49,8 @@ class _SideDrawerState extends State<SideDrawer> {
 
   void _pushMovie(BuildContext context, List subject) {
     Navigator.pop(context);
-    Navigator.push(context, new MaterialPageRoute(
-      builder: (context) {
-        return new Scaffold(
-            appBar: new AppBar(title: new Text("fetch moive")),
-            body: new ListView.builder(
-                padding: EdgeInsets.zero,
-                itemCount: subject.length,
-                itemBuilder: (context, i) {
-                  final movie = subject[i];
-                  return new ListTile(
-                      title: new Text(movie['title']),
-                      subtitle: new Text(movie['original_title']));
-                }));
-      },
-    ));
+    Navigator.push(context, new MaterialPageRoute(builder: (context) {
+      return new MovieList(subject);
+    }));
   }
 }
