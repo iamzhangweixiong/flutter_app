@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
@@ -9,26 +10,35 @@ class MovieList extends StatefulWidget {
 
 class _MovieListState extends State<MovieList> {
   final List movies = new List();
+  bool isLoading = true;
 
   @override
   void initState() {
     super.initState();
+    isLoading = true;
     fetchMovie(context);
   }
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: new AppBar(title: new Text("fetch moive")),
-        body: new ListView.builder(
-            padding: EdgeInsets.zero,
-            itemCount: movies.length,
-            itemBuilder: (context, i) {
-              final movie = movies[i];
-              return new ListTile(
-                  title: new Text(movie['title']),
-                  subtitle: new Text(movie['original_title']));
-            }));
+        appBar: new AppBar(title: new Text("fetch moive")), body: selectBody());
+  }
+
+  Widget selectBody() {
+    if (isLoading) {
+      return new Center(child: const CupertinoActivityIndicator());
+    } else {
+      return new ListView.builder(
+          padding: EdgeInsets.zero,
+          itemCount: movies.length,
+          itemBuilder: (context, i) {
+            final movie = movies[i];
+            return new ListTile(
+                title: new Text(movie['title']),
+                subtitle: new Text(movie['original_title']));
+          });
+    }
   }
 
   void fetchMovie(BuildContext context) async {
@@ -41,6 +51,7 @@ class _MovieListState extends State<MovieList> {
       Map<String, dynamic> body = _jsonDecoder.convert(response.body);
       List subjects = body['subjects'];
       setState(() {
+        isLoading = false;
         movies.addAll(subjects);
       });
     }
