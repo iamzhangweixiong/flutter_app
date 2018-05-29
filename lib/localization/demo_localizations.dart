@@ -16,11 +16,15 @@ class DemoLocalizations {
     'en': {
       'app':'Flutter Demo',
       'title': 'Hello World',
+      'gallery': 'from gallery',
+      'camera': 'from camera',
       'movie_title': 'fetch movie'
     },
     'zh': {
       'app':'Flutter Demo',
       'title': '哈哈',
+      'gallery': '从相册选取',
+      'camera': '从相机拍照',
       'movie_title': '电影'
     }
   };
@@ -35,6 +39,14 @@ class DemoLocalizations {
 
   String get movieTitle {
     return _localizedValues[locale.languageCode]['movie_title'];
+  }
+
+  String get gallery {
+    return _localizedValues[locale.languageCode]['gallery'];
+  }
+
+  String get camera {
+    return _localizedValues[locale.languageCode]['camera'];
   }
 }
 

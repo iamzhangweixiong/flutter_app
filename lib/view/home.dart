@@ -20,17 +20,33 @@ class HomeState extends State<Home> with WidgetsBindingObserver {
         appBar: new AppBar(title: new Text(DemoLocalizations.of(context).app)),
         body: new Center(
             child: new Column(children: <Widget>[
-          new Center(
+          new Padding(
+              padding: const EdgeInsets.all(10.0),
               child: _image == null
                   ? new Text("no image")
                   : new Image.file(_image, width: 200.0, height: 200.0)),
-          new Center(
-              child: new RaisedButton.icon(
-                  icon: Icon(Icons.add),
-                  label: new Text("Button"),
-                  onPressed: () {
-                    getImage(ImageSource.gallery);
-                  }))
+          new Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: new ConstrainedBox(
+                  constraints: const BoxConstraints(minWidth: double.infinity),
+                  child: new RaisedButton.icon(
+                      icon: new Image.asset("assets/chat_camera_icon.png",
+                          width: 20.0, height: 20.0),
+                      label: new Text(DemoLocalizations.of(context).camera),
+                      onPressed: () {
+                        getImage(ImageSource.camera);
+                      }))),
+          new Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: new ConstrainedBox(
+                  constraints: const BoxConstraints(minWidth: double.infinity),
+                  child: new RaisedButton.icon(
+                      icon: new Image.asset("assets/chat_photo_icon.png",
+                          width: 20.0, height: 20.0),
+                      label: new Text(DemoLocalizations.of(context).gallery),
+                      onPressed: () {
+                        getImage(ImageSource.gallery);
+                      })))
         ])));
   }
 
