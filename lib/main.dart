@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/localization/demo_localizations.dart';
-import 'package:flutter_app/view/main_page.dart';
+import 'package:flutter_app/view/home.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() => runApp(new MyApp());
@@ -22,6 +22,6 @@ class MyApp extends StatelessWidget {
           return DemoLocalizations.of(context).title;
         },
         theme: new ThemeData(primaryColor: Colors.white),
-        home: new MainPage());
+        home: new Home());
   }
 }
