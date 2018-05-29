@@ -12,7 +12,6 @@ class MainPageState extends State<MainPage> with WidgetsBindingObserver {
   final _suggestions = <WordPair>[];
   final _saved = new Set<WordPair>();
   final _biggerFont = const TextStyle(fontSize: 18.0);
-  final jsonDecoder = new JsonDecoder();
 
   @override
   Widget build(BuildContext context) {

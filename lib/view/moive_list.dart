@@ -10,7 +10,7 @@ class MovieList extends StatefulWidget {
 }
 
 class _MovieListState extends State<MovieList> {
-  final List movies = new List();
+  List movies = new List();
   bool isLoading = true;
 
   @override
@@ -35,10 +35,11 @@ class _MovieListState extends State<MovieList> {
           itemCount: movies.length,
           itemBuilder: (context, i) {
             final movie = movies[i];
+            final imageUrl = movie['images']['small'];
             return new ListTile(
                 title: new Text(movie['title']),
                 trailing: new CachedNetworkImage(
-                    imageUrl: movie['images']['small'],
+                    imageUrl: imageUrl,
                     width: 60.0,
                     height: 60.0,
                     placeholder: new CupertinoActivityIndicator(),
@@ -54,7 +55,6 @@ class _MovieListState extends State<MovieList> {
     print(url);
     http.Response response = await http.get(url);
     if (response.statusCode == 200) {
-      print(response.statusCode);
       Map<String, dynamic> body = _jsonDecoder.convert(response.body);
       List subjects = body['subjects'];
       setState(() {
