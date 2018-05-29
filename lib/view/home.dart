@@ -15,6 +15,9 @@ class HomeState extends State<Home> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
+    final galleryIcon = "assets/chat_camera_icon.png";
+    final cameraIcon = "assets/chat_photo_icon.png";
+
     return new Scaffold(
         drawer: new SideDrawer(),
         appBar: new AppBar(title: new Text(DemoLocalizations.of(context).app)),
@@ -30,8 +33,7 @@ class HomeState extends State<Home> with WidgetsBindingObserver {
               child: new ConstrainedBox(
                   constraints: const BoxConstraints(minWidth: double.infinity),
                   child: new RaisedButton.icon(
-                      icon: new Image.asset("assets/chat_camera_icon.png",
-                          width: 20.0, height: 20.0),
+                      icon: new Image.asset(galleryIcon, width: 20.0, height: 20.0),
                       label: new Text(DemoLocalizations.of(context).camera),
                       onPressed: () {
                         getImage(ImageSource.camera);
@@ -41,8 +43,7 @@ class HomeState extends State<Home> with WidgetsBindingObserver {
               child: new ConstrainedBox(
                   constraints: const BoxConstraints(minWidth: double.infinity),
                   child: new RaisedButton.icon(
-                      icon: new Image.asset("assets/chat_photo_icon.png",
-                          width: 20.0, height: 20.0),
+                      icon: new Image.asset(cameraIcon, width: 20.0, height: 20.0),
                       label: new Text(DemoLocalizations.of(context).gallery),
                       onPressed: () {
                         getImage(ImageSource.gallery);
