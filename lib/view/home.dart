@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/localization/demo_localizations.dart';
 import 'package:flutter_app/view/side_drawer.dart';
@@ -33,21 +34,22 @@ class HomeState extends State<Home> with WidgetsBindingObserver {
               child: new ConstrainedBox(
                   constraints: const BoxConstraints(minWidth: double.infinity),
                   child: new RaisedButton.icon(
-                      icon: new Image.asset(galleryIcon, width: 20.0, height: 20.0),
+                      icon: new Image.asset(galleryIcon,
+                          width: 20.0, height: 20.0),
                       label: new Text(DemoLocalizations.of(context).camera),
                       onPressed: () {
                         getImage(ImageSource.camera);
                       }))),
-          new Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: new ConstrainedBox(
-                  constraints: const BoxConstraints(minWidth: double.infinity),
-                  child: new RaisedButton.icon(
-                      icon: new Image.asset(cameraIcon, width: 20.0, height: 20.0),
-                      label: new Text(DemoLocalizations.of(context).gallery),
-                      onPressed: () {
-                        getImage(ImageSource.gallery);
-                      })))
+          new CupertinoButton(
+              child: new Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    new Image.asset(cameraIcon, width: 20.0, height: 20.0),
+                    new Text(DemoLocalizations.of(context).gallery)
+                  ]),
+              onPressed: () {
+                getImage(ImageSource.gallery);
+              }),
         ])));
   }
 
