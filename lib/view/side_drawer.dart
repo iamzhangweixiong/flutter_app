@@ -9,12 +9,6 @@ class SideDrawer extends StatefulWidget {
 
 class _SideDrawerState extends State<SideDrawer> {
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-//    inheritFromWidgetOfExactType();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return new Drawer(
       child: new ListView(
@@ -32,7 +26,6 @@ class _SideDrawerState extends State<SideDrawer> {
           new ListTile(
               title: new Text('fetch movie'),
               onTap: () {
-                Navigator.pop(context);
                 fetchMovie(context);
               })
         ],
@@ -54,17 +47,19 @@ class _SideDrawerState extends State<SideDrawer> {
   }
 
   void _pushMovie(BuildContext context, List subject) {
+    Navigator.pop(context);
     Navigator.push(context, new MaterialPageRoute(
       builder: (context) {
         return new Scaffold(
             appBar: new AppBar(title: new Text("fetch moive")),
             body: new ListView.builder(
-                padding: const EdgeInsets.all(5.0),
+                padding: EdgeInsets.zero,
                 itemCount: subject.length,
                 itemBuilder: (context, i) {
+                  final movie = subject[i];
                   return new ListTile(
-                      title: new Text(subject[i]['title']),
-                      subtitle: new Text(subject[i]['original_title']));
+                      title: new Text(movie['title']),
+                      subtitle: new Text(movie['original_title']));
                 }));
       },
     ));

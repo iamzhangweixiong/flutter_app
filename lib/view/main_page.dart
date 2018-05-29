@@ -5,10 +5,10 @@ import 'package:flutter_app/view/side_drawer.dart';
 
 class MainPage extends StatefulWidget {
   @override
-  createState() => new RandomWordsState();
+  createState() => new MainPageState();
 }
 
-class RandomWordsState extends State<MainPage> with WidgetsBindingObserver {
+class MainPageState extends State<MainPage> with WidgetsBindingObserver {
   final _suggestions = <WordPair>[];
   final _saved = new Set<WordPair>();
   final _biggerFont = const TextStyle(fontSize: 18.0);
