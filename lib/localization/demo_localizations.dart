@@ -14,17 +14,19 @@ class DemoLocalizations {
 
   static Map<String, Map<String, String>> _localizedValues = {
     'en': {
-      'app':'Flutter Demo',
+      'app': 'Flutter Demo',
       'title': 'Hello World',
       'gallery': 'from gallery',
       'camera': 'from camera',
+      'closeItem': 'close',
       'movie_title': 'fetch movie'
     },
     'zh': {
-      'app':'Flutter Demo',
+      'app': 'Flutter Demo',
       'title': '哈哈',
       'gallery': '从相册选取',
       'camera': '从相机拍照',
+      'closeItem': '关闭',
       'movie_title': '电影'
     }
   };
@@ -48,9 +50,14 @@ class DemoLocalizations {
   String get camera {
     return _localizedValues[locale.languageCode]['camera'];
   }
+
+  String get closeItem {
+    return _localizedValues[locale.languageCode]['closeItem'];
+  }
 }
 
-class DemoLocalizationsDelegate extends LocalizationsDelegate<DemoLocalizations> {
+class DemoLocalizationsDelegate
+    extends LocalizationsDelegate<DemoLocalizations> {
   const DemoLocalizationsDelegate();
 
   @override
@@ -60,7 +67,8 @@ class DemoLocalizationsDelegate extends LocalizationsDelegate<DemoLocalizations>
   Future<DemoLocalizations> load(Locale locale) {
     // Returning a SynchronousFuture here because an async "load" operation
     // isn't needed to produce an instance of DemoLocalizations.
-    return new SynchronousFuture<DemoLocalizations>(new DemoLocalizations(locale));
+    return new SynchronousFuture<DemoLocalizations>(
+        new DemoLocalizations(locale));
   }
 
   @override

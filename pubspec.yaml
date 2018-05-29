@@ -39,6 +39,7 @@ flutter:
   assets:
         - assets/chat_camera_icon.png
         - assets/chat_photo_icon.png
+        - assets/chats_red_envelopes.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
