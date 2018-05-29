@@ -45,7 +45,9 @@ class HomeState extends State<Home> with WidgetsBindingObserver {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     new Image.asset(cameraIcon, width: 20.0, height: 20.0),
-                    new Text(DemoLocalizations.of(context).gallery)
+                    new Padding(
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: new Text(DemoLocalizations.of(context).gallery))
                   ]),
               onPressed: () {
                 getImage(ImageSource.gallery);
