@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'dart:convert';
+import 'dart:isolate';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_app/localization/demo_localizations.dart';
 import 'package:http/http.dart' as http;
@@ -11,6 +13,7 @@ class MovieList extends StatefulWidget {
 }
 
 class _MovieListState extends State<MovieList> {
+  final url = "https://api.douban.com/v2/movie/top250?start=0&count=10";
   List movies = new List();
   bool isLoading = true;
 
@@ -18,7 +21,7 @@ class _MovieListState extends State<MovieList> {
   void initState() {
     super.initState();
     isLoading = true;
-    fetchMovie(context);
+    fetchMovie2();
   }
 
   @override
@@ -52,9 +55,8 @@ class _MovieListState extends State<MovieList> {
     }
   }
 
-  void fetchMovie(BuildContext context) async {
+  void fetchMovie() async {
     final _jsonDecoder = new JsonDecoder();
-    final url = "https://api.douban.com/v2/movie/top250?start=0&count=10";
     print(url);
     http.Response response = await http.get(url);
     if (response.statusCode == 200) {
@@ -65,5 +67,49 @@ class _MovieListState extends State<MovieList> {
         movies.addAll(subjects);
       });
     }
+  }
+
+  /// use Isolate
+  void fetchMovie2() async {
+    ReceivePort receivePort = new ReceivePort();
+
+    Isolate isolate = await Isolate.spawn(dataLoader, receivePort.sendPort);
+
+    SendPort sendPort = await receivePort.first;
+
+    Map<String, dynamic> body = await sendReceive(sendPort, url);
+    List subjects = body['subjects'];
+
+    setState(() {
+      isLoading = false;
+      movies.addAll(subjects);
+    });
+
+    isolate.kill(priority: Isolate.immediate);
+  }
+
+// the entry point for the isolate
+  static dataLoader(SendPort sendPort) async {
+    // Open the ReceivePort for incoming messages.
+    ReceivePort port = new ReceivePort();
+
+    // Notify any other isolates what port this isolate listens to.
+    sendPort.send(port.sendPort);
+
+    await for (var msg in port) {
+      String data = msg[0];
+      SendPort replyTo = msg[1];
+
+      String dataURL = data;
+      http.Response response = await http.get(dataURL);
+      // Lots of JSON to parse
+      replyTo.send(JSON.decode(response.body));
+    }
+  }
+
+  Future sendReceive(SendPort port, msg) {
+    ReceivePort response = new ReceivePort();
+    port.send([msg, response.sendPort]);
+    return response.first;
   }
 }
