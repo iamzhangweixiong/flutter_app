@@ -21,7 +21,9 @@ class _MovieListState extends State<MovieList> {
   void initState() {
     super.initState();
     isLoading = true;
-    fetchMovie2();
+//    scheduleMicrotask(() {
+      fetchMovie2();
+//    });
   }
 
   @override
