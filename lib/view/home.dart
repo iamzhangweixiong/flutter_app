@@ -31,15 +31,12 @@ class HomeState extends State<Home> with WidgetsBindingObserver {
                   : new Image.file(_image, width: 200.0, height: 200.0)),
           new Padding(
               padding: const EdgeInsets.all(10.0),
-              child: new ConstrainedBox(
-                  constraints: const BoxConstraints(minWidth: double.infinity),
-                  child: new RaisedButton.icon(
-                      icon: new Image.asset(galleryIcon,
-                          width: 20.0, height: 20.0),
-                      label: new Text(DemoLocalizations.of(context).camera),
-                      onPressed: () {
-                        getImage(ImageSource.camera);
-                      }))),
+              child: new RaisedButton.icon(
+                  icon: new Image.asset(galleryIcon, width: 20.0, height: 20.0),
+                  label: new Text(DemoLocalizations.of(context).camera),
+                  onPressed: () {
+                    getImage(ImageSource.camera);
+                  })),
           new CupertinoButton(
               child: new Row(
                   mainAxisAlignment: MainAxisAlignment.center,
